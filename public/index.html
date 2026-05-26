@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond &middot; 10102 on Ethereum</title>
+    <meta name="description" content="A permanent index of the IPFS-hosted ENS sites built by 10102. Self-sovereign Computing. Code that runs for eternity.">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+
+    <!-- Open Graph (link previews on social + chats) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Beyond &middot; 10102 on Ethereum">
+    <meta property="og:description" content="A permanent index of the IPFS-hosted ENS sites built by 10102. Sites that outlive their authors.">
+    <meta property="og:image" content="img/favicon.png">
+    <meta property="og:url" content="https://beyond.eth.limo">
+    <meta name="twitter:card" content="summary">
+
+    <style>
+        :root {
+            --bg-base: #0a0d18;
+            --blue: #4a85d4;
+            --blue-bright: #7eafdf;
+            --blue-dim: rgba(74, 133, 212, 0.5);
+            --text: #e8e4d8;
+            --text-dim: rgba(232, 228, 216, 0.78);
+            --text-faint: rgba(232, 228, 216, 0.62);
+            --border-subtle: rgba(74, 133, 212, 0.18);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            background-color: var(--bg-base);
+            background-image: linear-gradient(
+                135deg,
+                #08101e 0%,
+                #0e1a36 35%,
+                #102143 50%,
+                #0e1a36 65%,
+                #08101e 100%
+            );
+            background-attachment: fixed;
+            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.04;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 32px 60px;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 0 100px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 680px;
+            height: 380px;
+            background: radial-gradient(ellipse at center, rgba(74, 133, 212, 0.18) 0%, transparent 60%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.42em;
+            color: var(--blue);
+            margin-bottom: 26px;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        .hero-title {
+            font-size: clamp(4rem, 11vw, 9rem);
+            font-weight: 100;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            margin-bottom: 32px;
+            color: var(--blue-bright);
+            text-shadow: 0 2px 24px rgba(74, 133, 212, 0.22);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+            font-weight: 300;
+            color: var(--text);
+            max-width: 700px;
+            margin: 0 auto 36px;
+            line-height: 1.55;
+            opacity: 1;
+        }
+
+        .hero-credit {
+            font-size: 0.92rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            font-weight: 400;
+        }
+
+        .hero-credit a {
+            color: var(--blue);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .hero-credit a:hover {
+            color: var(--blue-bright);
+        }
+
+        /* Section */
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.32em;
+            color: var(--blue);
+            text-align: center;
+            margin-bottom: 14px;
+            opacity: 0.8;
+        }
+
+        .section-title {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 200;
+            text-align: center;
+            color: var(--text);
+            margin-bottom: 52px;
+            letter-spacing: -0.005em;
+        }
+
+        /* Tile grid */
+        .tile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+            margin-bottom: 80px;
+        }
+
+        .tile {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: linear-gradient(135deg, rgba(15, 24, 40, 0.65) 0%, rgba(8, 12, 20, 0.85) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 32px 30px;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tile::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--blue), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tile:hover {
+            transform: translateY(-4px);
+            border-color: var(--blue);
+            box-shadow: 0 18px 40px rgba(74, 133, 212, 0.2);
+            background: linear-gradient(135deg, rgba(20, 32, 52, 0.85) 0%, rgba(12, 18, 30, 0.95) 100%);
+        }
+
+        .tile:hover::after {
+            opacity: 1;
+        }
+
+        .tile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .tile-name {
+            font-family: 'SF Mono', 'JetBrains Mono', 'Menlo', 'Monaco', monospace;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--blue);
+            letter-spacing: 0.02em;
+            opacity: 0.85;
+        }
+
+        .tile-status {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-faint);
+        }
+
+        .tile-status.live {
+            border-color: rgba(74, 133, 212, 0.45);
+            background: rgba(74, 133, 212, 0.16);
+            color: var(--blue-bright);
+        }
+
+        .tile-title {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--text);
+            margin-bottom: 12px;
+            letter-spacing: -0.005em;
+        }
+
+        .tile-description {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.65;
+            font-weight: 300;
+        }
+
+        .tile-arrow {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 22px;
+            font-size: 0.82rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--blue);
+            font-weight: 400;
+            transition: gap 0.3s ease;
+            gap: 6px;
+        }
+
+        .tile:hover .tile-arrow {
+            gap: 12px;
+            color: var(--blue-bright);
+        }
+
+        /* Coming-soon tiles styled differently */
+        .tile.upcoming {
+            opacity: 0.55;
+            cursor: default;
+        }
+
+        .tile.upcoming:hover {
+            transform: none;
+            border-color: var(--border-subtle);
+            box-shadow: none;
+            background: linear-gradient(135deg, rgba(15, 24, 40, 0.65) 0%, rgba(8, 12, 20, 0.85) 100%);
+        }
+
+        .tile.upcoming:hover::after { opacity: 0; }
+        .tile.upcoming:hover .tile-arrow { gap: 6px; color: var(--blue); }
+
+        .tile.upcoming .tile-status {
+            border-color: rgba(232, 228, 216, 0.2);
+            color: var(--text-faint);
+        }
+
+        .tile.upcoming .tile-arrow {
+            display: none;
+        }
+
+        /* Philosophy / closing */
+        .philosophy {
+            text-align: center;
+            max-width: 680px;
+            margin: 80px auto 60px;
+            padding: 0 24px;
+        }
+
+        .philosophy-quote {
+            font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+            font-weight: 200;
+            line-height: 1.6;
+            color: var(--text);
+            font-style: italic;
+            opacity: 0.9;
+            letter-spacing: -0.005em;
+        }
+
+        .philosophy-quote::before,
+        .philosophy-quote::after {
+            color: var(--blue);
+            font-style: normal;
+            opacity: 0.6;
+        }
+
+        .philosophy-quote::before { content: '\201C '; }
+        .philosophy-quote::after { content: ' \201D'; }
+
+        .philosophy-attribution {
+            margin-top: 22px;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            font-weight: 300;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 50px 24px 30px;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-faint);
+            margin-bottom: 12px;
+        }
+
+        .footer-text a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s ease;
+        }
+
+        .footer-text a:hover {
+            color: var(--blue-bright);
+        }
+
+        .footer-meta {
+            font-size: 0.75rem;
+            color: var(--text-faint);
+            opacity: 0.6;
+            letter-spacing: 0.08em;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 50px 20px 40px; }
+            .hero { padding: 30px 0 60px; }
+            .hero::before { width: 100%; height: 280px; }
+            .hero-eyebrow { letter-spacing: 0.3em; }
+            .hero-credit { letter-spacing: 0.24em; }
+            .tile-grid { gap: 16px; margin-bottom: 60px; }
+            .tile { padding: 26px 24px; }
+            .philosophy { margin: 60px auto 40px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; animation: none !important; }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-eyebrow">Permanence on Ethereum</div>
+            <h1 class="hero-title">Beyond</h1>
+            <p class="hero-subtitle">A permanent index of the IPFS-hosted ENS sites that outlive their authors.</p>
+            <div class="hero-credit">by <a href="https://10102.io" target="_blank" rel="noopener noreferrer">10102</a></div>
+        </section>
+
+        <!-- Portfolio tiles -->
+        <section>
+            <div class="section-label">The Portfolio</div>
+            <h2 class="section-title">Sites that endure</h2>
+
+            <div class="tile-grid">
+
+                <a href="https://tokenpot.eth.limo" target="_blank" rel="noopener noreferrer" class="tile">
+                    <div class="tile-header">
+                        <span class="tile-name">tokenpot.eth</span>
+                        <span class="tile-status live">Live</span>
+                    </div>
+                    <div class="tile-title">Tokenpot Capital</div>
+                    <div class="tile-description">Archive of the private cryptocurrency investment fund that operated 2015 &mdash; 2019. Predecessor to 10102.</div>
+                    <div class="tile-arrow">Visit &rarr;</div>
+                </a>
+
+                <a href="https://rogerfederer.eth.limo" target="_blank" rel="noopener noreferrer" class="tile">
+                    <div class="tile-header">
+                        <span class="tile-name">rogerfederer.eth</span>
+                        <span class="tile-status live">Live</span>
+                    </div>
+                    <div class="tile-title">The Disruptor</div>
+                    <div class="tile-description">Tribute to Roger Federer&apos;s transformation of tennis &mdash; a study in disruption, drawing a Bitcoin parallel.</div>
+                    <div class="tile-arrow">Visit &rarr;</div>
+                </a>
+
+                <div class="tile upcoming" aria-disabled="true">
+                    <div class="tile-header">
+                        <span class="tile-name">10102.eth</span>
+                        <span class="tile-status">Soon</span>
+                    </div>
+                    <div class="tile-title">10102 on Ethereum</div>
+                    <div class="tile-description">The brand manifesto, native to ENS. Self-sovereign Computing &mdash; the web3 expression of what 10102.io is on the open web.</div>
+                    <div class="tile-arrow">Visit &rarr;</div>
+                </div>
+
+                <div class="tile upcoming" aria-disabled="true">
+                    <div class="tile-header">
+                        <span class="tile-name">cyborg.eth</span>
+                        <span class="tile-status">Soon</span>
+                    </div>
+                    <div class="tile-title">Identity for agents</div>
+                    <div class="tile-description">An ENS identity layer for autonomous agents &mdash; the address an AI can sign with, remember, and be known by.</div>
+                    <div class="tile-arrow">Visit &rarr;</div>
+                </div>
+
+                <div class="tile upcoming" aria-disabled="true">
+                    <div class="tile-header">
+                        <span class="tile-name">never.eth</span>
+                        <span class="tile-status">Soon</span>
+                    </div>
+                    <div class="tile-title">What should not be forgotten</div>
+                    <div class="tile-description">A page on memory and refusal. An essay, permanent.</div>
+                    <div class="tile-arrow">Visit &rarr;</div>
+                </div>
+
+                <div class="tile upcoming" aria-disabled="true">
+                    <div class="tile-header">
+                        <span class="tile-name">braveheart.eth</span>
+                        <span class="tile-status">Soon</span>
+                    </div>
+                    <div class="tile-title">On courage</div>
+                    <div class="tile-description">A small monument to standing for what matters. A page, on-chain.</div>
+                    <div class="tile-arrow">Visit &rarr;</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Philosophy -->
+        <section class="philosophy">
+            <p class="philosophy-quote">Code that runs for eternity. Protocols that operate independently of any intermediary. Tools for true digital permanence.</p>
+            <div class="philosophy-attribution">The 10102 Thesis</div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-text">
+                Built by <a href="https://10102.io" target="_blank" rel="noopener noreferrer">10102</a> &middot; permanence and self-custody on Ethereum
+            </div>
+            <div class="footer-meta">beyond.eth &middot; hosted on IPFS &middot; works in any ENS-aware browser</div>
+        </footer>
+
+    </div>
+</body>
+</html>

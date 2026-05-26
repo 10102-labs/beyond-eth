@@ -1,0 +1,37 @@
+name: Deploy to IPFS + ENS via Omnipin
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+# Minimum permissions — workflow only needs to read the repo, never write back.
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    # Skip if OMNIPIN_ENS variable isn't set
+    if: vars.OMNIPIN_ENS != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+
+      # Pinned version (not @latest) — supply-chain protection.
+      - name: Install Omnipin
+        run: bun i -g omnipin@3.0.0
+
+      - name: Deploy to IPFS and update ENS contenthash
+        run: |
+          SAFE_FLAG=""
+          if [ -n "${{ vars.OMNIPIN_SAFE }}" ]; then
+            SAFE_FLAG="--safe ${{ vars.OMNIPIN_SAFE }}"
+          fi
+          omnipin deploy ./public --strict --ens "${{ vars.OMNIPIN_ENS }}" $SAFE_FLAG
+        env:
+          OMNIPIN_PINATA_TOKEN: ${{ secrets.OMNIPIN_PINATA_TOKEN }}
+          OMNIPIN_LIGHTHOUSE_TOKEN: ${{ secrets.OMNIPIN_LIGHTHOUSE_TOKEN }}
+          OMNIPIN_4EVERLAND_TOKEN: ${{ secrets.OMNIPIN_4EVERLAND_TOKEN }}
+          OMNIPIN_PK: ${{ secrets.OMNIPIN_PK }}
