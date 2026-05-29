@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beyond &middot; 10102 on Ethereum</title>
+    <title>Beyond by 10102</title>
     <meta name="description" content="A growing collection of permanent ENS sites — built to outlast their authors. Curated by 10102. Self-sovereign Computing on Ethereum.">
     <link rel="icon" type="image/png" href="img/favicon.png">
 
     <!-- Open Graph (link previews on social + chats) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Beyond &middot; 10102 on Ethereum">
+    <meta property="og:title" content="Beyond by 10102">
     <meta property="og:description" content="A growing collection of permanent ENS sites — built to outlast their authors. Curated by 10102. Self-sovereign Computing on Ethereum.">
     <meta property="og:image" content="img/favicon.png">
     <meta property="og:url" content="https://beyond.eth.limo">
@@ -38,11 +38,11 @@
             color: var(--text);
             background-color: var(--bg-base);
             background-image: radial-gradient(
-                ellipse 120% 100% at center,
+                ellipse 110% 90% at center,
                 #1c3469 0%,
-                #15264d 35%,
-                #0d1a36 75%,
-                #08101e 100%
+                #14254a 30%,
+                #0a1428 60%,
+                #04060e 100%
             );
             min-height: 100vh;
             line-height: 1.6;
@@ -116,6 +116,7 @@
             margin: 0 auto 36px;
             line-height: 1.55;
             opacity: 1;
+            text-wrap: balance;
         }
 
         .hero-credit {
@@ -154,6 +155,7 @@
             color: var(--text);
             margin-bottom: 52px;
             letter-spacing: -0.005em;
+            text-wrap: balance;
         }
 
         /* Tile grid */
@@ -232,6 +234,15 @@
             color: var(--blue-bright);
         }
 
+        .tile-category {
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.26em;
+            color: var(--text-faint);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
         .tile-title {
             font-size: 1.4rem;
             font-weight: 300;
@@ -239,6 +250,7 @@
             margin-bottom: 12px;
             letter-spacing: -0.005em;
         }
+
 
         .tile-description {
             font-size: 0.95rem;
@@ -460,23 +472,25 @@
 
             <div class="tile-grid">
 
-                <a href="https://tokenpot.eth.limo" target="_blank" rel="noopener noreferrer" class="tile">
-                    <div class="tile-header">
-                        <span class="tile-name">tokenpot.eth</span>
-                        <span class="tile-status live">Live</span>
-                    </div>
-                    <div class="tile-title">Tokenpot Capital</div>
-                    <div class="tile-description">Archive of the private cryptocurrency investment fund that operated 2015 &mdash; 2019. Predecessor to 10102.</div>
-                    <div class="tile-arrow">Visit &rarr;</div>
-                </a>
-
                 <a href="https://rogerfederer.eth.limo" target="_blank" rel="noopener noreferrer" class="tile">
                     <div class="tile-header">
                         <span class="tile-name">rogerfederer.eth</span>
                         <span class="tile-status live">Live</span>
                     </div>
+                    <div class="tile-category">Tribute</div>
                     <div class="tile-title">The Disruptor</div>
                     <div class="tile-description">Tribute to Roger Federer&apos;s transformation of tennis &mdash; a study in disruption, drawing a Bitcoin parallel.</div>
+                    <div class="tile-arrow">Visit &rarr;</div>
+                </a>
+
+                <a href="https://qubic.eth.limo" target="_blank" rel="noopener noreferrer" class="tile">
+                    <div class="tile-header">
+                        <span class="tile-name">qubic.eth</span>
+                        <span class="tile-status live">Live</span>
+                    </div>
+                    <div class="tile-category">Manifesto</div>
+                    <div class="tile-title">The bare metal blockchain</div>
+                    <div class="tile-description">10102's thesis on Qubic &mdash; bare metal, tickchain, useful proof of work. Where computation has a purpose.</div>
                     <div class="tile-arrow">Visit &rarr;</div>
                 </a>
 
@@ -485,26 +499,29 @@
                         <span class="tile-name">cyborg.eth</span>
                         <span class="tile-status">Soon</span>
                     </div>
+                    <div class="tile-category">Project</div>
                     <div class="tile-title">Identity for agents</div>
                     <div class="tile-description">An ENS identity layer for autonomous agents &mdash; the address an AI can sign with, remember, and be known by.</div>
                     <div class="tile-arrow">Visit &rarr;</div>
                 </div>
 
-                <div class="tile upcoming" aria-disabled="true">
+                <a href="https://tokenpot.eth.limo" target="_blank" rel="noopener noreferrer" class="tile">
                     <div class="tile-header">
-                        <span class="tile-name">qubic.eth</span>
-                        <span class="tile-status">Soon</span>
+                        <span class="tile-name">tokenpot.eth</span>
+                        <span class="tile-status live">Live</span>
                     </div>
-                    <div class="tile-title">Qubic, on Ethereum</div>
-                    <div class="tile-description">A permanent on-chain presence for the Qubic ecosystem &mdash; bridging useful-proof-of-work computing into the open web.</div>
+                    <div class="tile-category">Archive</div>
+                    <div class="tile-title">Tokenpot Capital</div>
+                    <div class="tile-description">Archive of the private cryptocurrency investment fund that operated 2015 &mdash; 2019. Predecessor to 10102.</div>
                     <div class="tile-arrow">Visit &rarr;</div>
-                </div>
+                </a>
 
                 <div class="tile upcoming" aria-disabled="true">
                     <div class="tile-header">
                         <span class="tile-name">10102.eth</span>
                         <span class="tile-status">Soon</span>
                     </div>
+                    <div class="tile-category">Manifesto</div>
                     <div class="tile-title">10102 on Ethereum</div>
                     <div class="tile-description">The brand manifesto, native to ENS. Self-sovereign Computing &mdash; the web3 expression of what 10102.io is on the open web.</div>
                     <div class="tile-arrow">Visit &rarr;</div>
@@ -515,6 +532,7 @@
                         <span class="tile-name">your-name.eth</span>
                         <span class="tile-status invite">Open</span>
                     </div>
+                    <div class="tile-category">Open seat</div>
                     <div class="tile-title">Your site, here</div>
                     <div class="tile-description">A seat in the collection. Permanent ENS sites for people, projects, and cultural moments. Tell us what you have in mind.</div>
                     <div class="tile-arrow">Get in touch &rarr;</div>
