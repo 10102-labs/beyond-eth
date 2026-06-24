@@ -52,10 +52,10 @@ export default function Home() {
               <div className="tile-arrow">Visit →</div>
             </a>
 
-            <div className="tile upcoming" aria-disabled="true">
+            <a href="https://cyborg.eth.limo" target="_blank" rel="noopener noreferrer" className="tile">
               <div className="tile-header">
                 <span className="tile-name">cyborg.eth</span>
-                <span className="tile-status">Soon</span>
+                <span className="tile-status live">Live</span>
               </div>
               <div className="tile-category">Project</div>
               <div className="tile-title">Identity for agents</div>
@@ -63,7 +63,7 @@ export default function Home() {
                 An ENS identity layer for autonomous agents: the address an AI can sign with, remember, and be known by.
               </div>
               <div className="tile-arrow">Visit →</div>
-            </div>
+            </a>
 
             <a href="https://tokenpot.eth.limo" target="_blank" rel="noopener noreferrer" className="tile">
               <div className="tile-header">
