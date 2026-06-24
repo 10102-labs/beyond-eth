@@ -40,7 +40,7 @@ export const COLLECTIONS: Record<string, Collection> = {
     slug: 'cyborg',
     parentName: 'cyborg.eth',
     parentNode: namehash('cyborg.eth') as `0x${string}`,
-    live: false,
+    live: true,
     eyebrow: 'Identity for agents',
     blurb: 'A name on cyborg.eth: a verifiable onchain identity for you or your agent.',
     theme: {
