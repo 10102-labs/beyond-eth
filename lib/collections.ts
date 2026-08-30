@@ -9,6 +9,17 @@ export type Theme = {
   heroGradient: string; // gradient for the big name
 };
 
+export type Promo = {
+  /** Promo price as shown in copy; the claim flow itself always charges the on-chain price. */
+  priceEth: string;
+  /** Regular price shown struck through as the anchor. */
+  regularPriceEth: string;
+  /** ISO instant the promo ends; the banner self-hides after this, even on old pinned CIDs. */
+  endsAtIso: string;
+  /** Human-readable end date for copy, e.g. "April 13, 2027". */
+  endsAtLabel: string;
+};
+
 export type Collection = {
   slug: string; // /claim/<slug>
   parentName: string; // e.g. "miami.eth"
@@ -17,6 +28,7 @@ export type Collection = {
   eyebrow: string;
   blurb: string;
   theme: Theme;
+  promo?: Promo; // time-limited pricing banner; on-chain price is the source of truth
 };
 
 /** One entry per Beyond collection. Add a new hero domain here = new /claim route. */
@@ -58,6 +70,12 @@ export const COLLECTIONS: Record<string, Collection> = {
     live: true,
     eyebrow: 'The bare metal blockchain',
     blurb: 'A name on qubic.eth that you own and keep, secured on Ethereum.',
+    promo: {
+      priceEth: '0.01',
+      regularPriceEth: '0.1',
+      endsAtIso: '2027-04-13T00:00:00Z',
+      endsAtLabel: 'April 13, 2027',
+    },
     theme: {
       bg: 'radial-gradient(1100px 600px at 50% -10%, rgba(46,230,160,0.26), transparent 60%), linear-gradient(160deg, #04120c 0%, #06180f 55%, #03100a 100%)',
       accent: '#2ee6a0',

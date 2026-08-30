@@ -37,6 +37,34 @@
   max-width: 34ch;
 }
 
+.claim-promo {
+  margin-top: 24px;
+  padding: 14px 22px;
+  border-radius: 14px;
+  border: 1px solid var(--accent);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 15px;
+  color: #cdd3f0;
+}
+.claim-promo-price s {
+  color: #7e85ad;
+  margin-right: 2px;
+}
+.claim-promo-price strong {
+  color: var(--accent);
+  font-size: 17px;
+}
+.claim-promo-timer {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #9aa1c4;
+}
+.claim-promo-count {
+  font-variant-numeric: tabular-nums;
+  color: var(--accent2);
+  font-weight: 600;
+}
+
 .card {
   margin-top: 40px;
   width: 100%;
@@ -45,6 +73,12 @@
   border-radius: 20px;
   padding: 28px;
   backdrop-filter: blur(10px);
+}
+
+.account-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
 }
 
 .field {
@@ -124,6 +158,93 @@ button.cta:disabled {
 .success a {
   color: var(--accent2);
   font-weight: 600;
+}
+
+.email-row {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.email-fields {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.email-fields input {
+  flex: 1;
+  min-width: 0;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 15px;
+  padding: 10px 14px;
+  outline: 0;
+}
+.email-fields button {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #15052a;
+  background: var(--accent2);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.email-fields button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.email-note {
+  font-size: 13px;
+  color: #9aa1c4;
+  margin-top: 10px;
+}
+.email-note.ok {
+  color: var(--eyebrow);
+}
+.email-note.no {
+  color: #ff8aa6;
+}
+.email-note.faint {
+  color: #7e85ad;
+  font-size: 12px;
+}
+
+.claim-benefits {
+  margin-top: 36px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  text-align: left;
+}
+@media (max-width: 560px) {
+  .claim-benefits {
+    grid-template-columns: 1fr;
+  }
+}
+.benefit {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+.benefit h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--eyebrow);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+.benefit p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #9aa1c4;
+}
+.benefit a {
+  color: var(--accent2);
 }
 
 .claim-foot {

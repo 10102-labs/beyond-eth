@@ -6,6 +6,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { normalize } from 'viem/ens';
 import { formatEther, zeroAddress } from 'viem';
 import { REGISTRAR_ADDRESS, registrarAbi, ENS8004_URL } from '@/lib/registrar';
+import { EmailCapture } from './EmailCapture';
 
 export function ClaimFlow({ parentName, parentNode }: { parentName: string; parentNode: `0x${string}` }) {
   const { address, isConnected } = useAccount();
@@ -68,7 +69,7 @@ export function ClaimFlow({ parentName, parentNode }: { parentName: string; pare
   const { isLoading: confirming, isSuccess } = useWaitForTransactionReceipt({ hash });
 
   const fullName = label ? `${label}.${parentName}` : '';
-  const priceLabel = price !== undefined ? `${formatEther(price)} ETH` : '';
+  const priceLabel = price === undefined ? '' : price === 0n ? 'free' : `${formatEther(price)} ETH`;
 
   function claim() {
     if (!address || price === undefined) return;
@@ -86,10 +87,13 @@ export function ClaimFlow({ parentName, parentNode }: { parentName: string; pare
       <div className="card">
         <div className="success">
           <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 8 }}>{fullName} is yours.</div>
-          <div className="muted" style={{ marginBottom: 12 }}>It is in your wallet now.</div>
+          <div className="muted" style={{ marginBottom: 12 }}>
+            It is in your wallet now{address ? ` (${address.slice(0, 6)}…${address.slice(-4)})` : ''}.
+          </div>
           <a href={ENS8004_URL} target="_blank" rel="noopener noreferrer">
             Make it a verifiable AI agent →
           </a>
+          <EmailCapture source={`${parentName.split('.')[0]}-claim`} />
         </div>
       </div>
     );
@@ -99,6 +103,11 @@ export function ClaimFlow({ parentName, parentNode }: { parentName: string; pare
 
   return (
     <div className="card">
+      {isConnected && (
+        <div className="account-row">
+          <ConnectButton showBalance={false} chainStatus="none" accountStatus="address" />
+        </div>
+      )}
       <div className="field">
         <input
           value={raw}
@@ -118,6 +127,9 @@ export function ClaimFlow({ parentName, parentNode }: { parentName: string; pare
         {!labelError && label && isAvail === true && price !== undefined && (
           <span className="ok">
             {fullName} is available for {priceLabel}
+            {price === 0n && (
+              <span className="muted"> · included with your Computing Legacy membership</span>
+            )}
           </span>
         )}
         {!labelError && label && isAvail === false && parentEnabled && (
