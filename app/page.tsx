@@ -44,7 +44,7 @@ export default function Home() {
                 <span className="tile-status live">Live</span>
               </div>
               <div className="tile-category">Manifesto</div>
-              <div className="tile-title">The bare metal blockchain</div>
+              <div className="tile-title">The bare metal chain</div>
               <div className="tile-description">
                 10102&apos;s thesis on Qubic: bare metal, tickchain, useful proof of work. Where computation has a
                 purpose.

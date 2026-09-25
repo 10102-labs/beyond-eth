@@ -68,7 +68,7 @@ export const COLLECTIONS: Record<string, Collection> = {
     parentName: 'qubic.eth',
     parentNode: namehash('qubic.eth') as `0x${string}`,
     live: true,
-    eyebrow: 'The bare metal blockchain',
+    eyebrow: 'The bare metal chain',
     blurb: 'A name on qubic.eth that you own and keep, secured on Ethereum.',
     promo: {
       priceEth: '0.01',
