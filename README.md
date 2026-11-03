@@ -19,7 +19,9 @@ The claim flow (`app/claim/[collection]/ClaimFlow.tsx`) normalizes the typed lab
 - Mainnet: `0x16ebaA4A7f29E6c44DC344A4b81d78995C67ecD0`
 - Sepolia: `0xB0C77D01CbFa411C1d33F99B4afAD908Ae55c2C6`
 
-After a successful mint the app links to [ens8004.xyz](https://ens8004.xyz) to activate the name as a verifiable onchain agent.
+The registrar sets a resolver on mint but no address record, so the success card offers a one-click `setAddr` (`LinkWallet.tsx`) that points the new name at the minting wallet. The resolver is read from the v1 ENS registry: since ENSv2 the UniversalResolver answers through a read-only fallback contract.
+
+After a successful mint the app also links to [ens8004.xyz](https://ens8004.xyz) to activate the name as a verifiable onchain agent.
 
 ## Setup
 

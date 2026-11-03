@@ -12,5 +12,19 @@ export const registrarAbi = parseAbi([
   'function register(bytes32 parentNode, string label, address owner) payable returns (bytes32)',
 ]);
 
+/**
+ * ENS v1 registry. Write paths read a name's resolver here, not from the
+ * UniversalResolver: since ENSv2 the UR answers unmigrated names through a
+ * read-only fallback contract that cannot take setAddr.
+ */
+export const ENS_REGISTRY = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e' as const;
+
+export const ensRegistryAbi = parseAbi(['function resolver(bytes32 node) view returns (address)']);
+
+export const resolverAbi = parseAbi([
+  'function addr(bytes32 node) view returns (address)',
+  'function setAddr(bytes32 node, address a)',
+]);
+
 /** Post-mint: turn the new name into a verifiable onchain AI agent (Unruggable's app). */
 export const ENS8004_URL = 'https://ens8004.xyz';

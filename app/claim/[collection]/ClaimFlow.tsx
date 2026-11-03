@@ -7,6 +7,7 @@ import { normalize } from 'viem/ens';
 import { formatEther, zeroAddress } from 'viem';
 import { REGISTRAR_ADDRESS, registrarAbi, ENS8004_URL } from '@/lib/registrar';
 import { EmailCapture } from './EmailCapture';
+import { LinkWallet } from './LinkWallet';
 
 export function ClaimFlow({ parentName, parentNode }: { parentName: string; parentNode: `0x${string}` }) {
   const { address, isConnected } = useAccount();
@@ -90,6 +91,7 @@ export function ClaimFlow({ parentName, parentNode }: { parentName: string; pare
           <div className="muted" style={{ marginBottom: 12 }}>
             It is in your wallet now{address ? ` (${address.slice(0, 6)}…${address.slice(-4)})` : ''}.
           </div>
+          {address && <LinkWallet name={fullName} owner={address} />}
           <a href={ENS8004_URL} target="_blank" rel="noopener noreferrer">
             Make it a verifiable AI agent →
           </a>

@@ -160,6 +160,27 @@ button.cta:disabled {
   font-weight: 600;
 }
 
+.link-step {
+  margin-bottom: 16px;
+}
+.link-step p,
+p.link-step {
+  font-size: 14px;
+  color: #9aa1c4;
+}
+p.link-step.ok {
+  color: var(--eyebrow);
+}
+.link-step p.no {
+  color: #ff8aa6;
+  margin-top: 8px;
+}
+.link-step button.cta {
+  margin-top: 10px;
+  padding: 12px;
+  font-size: 15px;
+}
+
 .email-row {
   margin-top: 18px;
   padding-top: 16px;
